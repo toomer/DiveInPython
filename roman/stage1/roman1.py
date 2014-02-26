@@ -48,18 +48,21 @@ def toRoman(n):
             n -= numeral
     return result
 
+
 def fromRoman(s):
     """convert Roman numeral to integer"""
     # Make sure the input is right
     #Define pattern to detect valid Roman numerals
     romanNumeralPattern = '^M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'
-    if not re.search(romanNumeralPattern,s):
+    if not re.search(romanNumeralPattern, s):
         raise InvalidRomanNumeralError('Not a Roman number')
+    if not s:
+        raise InvalidRomanNumeralError('Input can not be blank')
 
     index = 0
     result = 0
     for literal, numeral in convertMap:
-        while s[index:index+len(literal)] == literal:
+        while s[index:index + len(literal)] == literal:
             index += len(literal)
             result += numeral
     return result
