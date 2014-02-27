@@ -36,7 +36,7 @@ convertMap = (('M',  1000),
 def toRoman(n):
     """convert integer to Roman numeral"""
     # Make sure the input is right
-    if not (0 < n < 4000):
+    if not (0 < n < 5000):
         raise OutOfRangeError("Range have to be between (1 .. 3000)")
     if int(n) != n:
         raise NotIntegerError("Input not an integer")
