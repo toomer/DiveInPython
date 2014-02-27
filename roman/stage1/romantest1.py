@@ -70,7 +70,11 @@ class KnownValues(unittest.TestCase):
                     (3844, 'MMMDCCCXLIV'),
                     (3888, 'MMMDCCCLXXXVIII'),
                     (3940, 'MMMCMXL'),
-                    (3999, 'MMMCMXCIX'))
+                    (3999, 'MMMCMXCIX'),
+                    (4000, 'MMMM'),
+                    (4500, 'MMMMD'),
+                    (4888, 'MMMMDCCCLXXXVIII'),
+                    (4999, 'MMMMCMXCIX'))
 
     def testToRomanKnownValues(self):
         """toRoman should give known result with known input"""
@@ -87,7 +91,7 @@ class KnownValues(unittest.TestCase):
 class ToRomanBadInput(unittest.TestCase):
     def testTooLarge(self):
         """toRoman should fail with large input"""
-        self.assertRaises(roman1.OutOfRangeError, roman1.toRoman, 4000)
+        self.assertRaises(roman1.OutOfRangeError, roman1.toRoman, 5000)
 
     def testZero(self):
         """toRoman should fail with 0 input"""
@@ -104,7 +108,7 @@ class ToRomanBadInput(unittest.TestCase):
 class FromRomanBadInput(unittest.TestCase):
     def testTooManyRepeatedNumerals(self):
         """fromRoman should fail with too many repeated numerals"""
-        for s in ('MMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):
+        for s in ('MMMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):
             self.assertRaises(roman1.InvalidRomanNumeralError, roman1.fromRoman, s)
 
     def testRepeatedPairs(self):
@@ -121,7 +125,7 @@ class FromRomanBadInput(unittest.TestCase):
 class SanityCheck(unittest.TestCase):
     def testSanity(self):
         """fromRoman(toRoman(n))==n for all n"""
-        for integer in range(1, 4000):
+        for integer in range(1, 5000):
             numeral = roman1.toRoman(integer)
             result = roman1.fromRoman(numeral)
             self.assertEqual(integer, result)
@@ -129,13 +133,13 @@ class SanityCheck(unittest.TestCase):
 class CaseCheck(unittest.TestCase):
     def testToRomanCase(self):
         """toRoman should always return uppercase"""
-        for integer in range(1, 4000):
+        for integer in range(1, 5000):
             numeral = roman1.toRoman(integer)
             self.assertEqual(numeral, numeral.upper())
 
     def testFromRomanCase(self):
         """fromRoman should only accept uppercase input"""
-        for integer in range(1, 4000):
+        for integer in range(1, 5000):
             numeral = roman1.toRoman(integer)
             roman1.fromRoman(numeral.upper())
             self.assertRaises(roman1.InvalidRomanNumeralError,
