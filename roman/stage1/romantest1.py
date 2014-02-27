@@ -122,6 +122,10 @@ class FromRomanBadInput(unittest.TestCase):
                   'MCMC', 'XCX', 'IVI', 'LM', 'LD', 'LC'):
             self.assertRaises(roman1.InvalidRomanNumeralError, roman1.fromRoman, s)
 
+    def testBlank(self):
+        """fromRoman should fail with blank string"""
+        self.assertRaises(roman1.InvalidRomanNumeralError, roman1.fromRoman, "")
+
 class SanityCheck(unittest.TestCase):
     def testSanity(self):
         """fromRoman(toRoman(n))==n for all n"""

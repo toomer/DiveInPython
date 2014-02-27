@@ -36,8 +36,8 @@ convertMap = (('M',  1000),
 def toRoman(n):
     """convert integer to Roman numeral"""
     # Make sure the input is right
-    if not (0 < n < 5000):
-        raise OutOfRangeError("Range have to be between (1 .. 4999)")
+    if not (0 < n < 4000):
+        raise OutOfRangeError("Range have to be between (1 .. 3000)")
     if int(n) != n:
         raise NotIntegerError("Input not an integer")
 
@@ -66,11 +66,13 @@ def fromRoman(s):
 
     if not romanNumeralPattern.search(s):
         raise InvalidRomanNumeralError('Not a Roman number')
+    if not s:
+        raise InvalidRomanNumeralError('Input can not be blank')
 
     index = 0
     result = 0
     for literal, numeral in convertMap:
-        while s[index:index+len(literal)] == literal:
+        while s[index:index + len(literal)] == literal:
             index += len(literal)
             result += numeral
     return result
